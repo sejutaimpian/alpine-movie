@@ -1,0 +1,361 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alpine-Movie</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.12.0/dist/cdn.min.js"></script>
+    <link rel="shortcut icon" href="logo.png" type="image/x-icon">
+    <style>
+        [x-cloak] {
+            display: none !important;
+        }
+    </style>
+</head>
+
+<body class="text-base antialiased text-gray-800 bg-gray-50 lg:text-lg">
+    <div class="container mx-auto my-8 lg:my-16" x-data="{
+        keyword: '',
+        moviesSkeleton: false,
+        movies: {},
+        async searchMovie() {
+            this.movies = {}
+            this.moviesSkeleton = true
+            const response = await fetch('http://www.omdbapi.com/?apikey=df78c129&s='+ this.keyword)
+            this.movies = await response.json()
+            this.keyword = ''
+            this.moviesSkeleton = false
+        },
+        movie: {},
+        async detailMovie(idMovie) {
+            this.movie = {}
+            this.modalSkeleton = true
+            const response = await fetch('http://www.omdbapi.com/?apikey=df78c129&i='+ idMovie)
+            this.movie = await response.json()
+            this.openModal = true
+            this.modalSkeleton = false
+        },
+        openModal: false,
+        modalSkeleton: false,
+        toggleOpenModal(){
+            this.openModal = !this.openModal
+        }
+    }">
+        <h1 class="my-4 text-2xl font-semibold text-center lg:text-3xl lg:my-8">
+            Alpine-Movie</h1>
+        <!-- Form Search -->
+        <form @submit.prevent="await searchMovie()" class="mx-4 my-4 lg:my-8">
+            <div class="flex items-center">
+                <input type="search" placeholder="Movie title..." name="keyword" id="keyword" x-model="keyword"
+                    class="flex-1 bg-white flex w-full px-3 rounded-s-lg shadow-sm min-h-[2.25rem] py-0 md:min-h-[2.5rem] border border-gray-300 outline-0 focus:border-emerald-500 focus:ring-emerald-500">
+                <button type="submit"
+                    class="inline-flex items-center justify-center font-medium transition-colors duration-75 border rounded-e-lg shadow-sm min-h-[2.25rem] px-3 md:min-h-[2.5rem] text-sm md:text-base text-emerald-500 focus:outline-none focus-visible:ring border-emerald-600 hover:bg-emerald-600 hover:text-white active:bg-emerald-700 disabled:bg-emerald-700 focus-visible:ring-emerald-400">
+                    Search
+                </button>
+            </div>
+        </form>
+        <!-- Movie List -->
+        <!-- Movies Skeleton -->
+        <div x-show="moviesSkeleton" x-cloak>
+            <div
+                class="grid grid-cols-2 gap-2 mx-2 my-4 lg:my-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 lg:gap-4 animate-pulse">
+                <div>
+                    <div class="w-full bg-slate-300 aspect-[9/13]"></div>
+                    <div class="m-2 md:m-4">
+                        <div class="w-full h-7 bg-slate-300"></div>
+                        <div class="w-1/3 h-4 my-1 bg-slate-300"></div>
+                        <div class="w-1/2 h-7 bg-slate-300"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="w-full bg-slate-300 aspect-[9/13]"></div>
+                    <div class="m-2 md:m-4">
+                        <div class="w-full h-7 bg-slate-300"></div>
+                        <div class="w-1/3 h-4 my-1 bg-slate-300"></div>
+                        <div class="w-1/2 h-7 bg-slate-300"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="w-full bg-slate-300 aspect-[9/13]"></div>
+                    <div class="m-2 md:m-4">
+                        <div class="w-full h-7 bg-slate-300"></div>
+                        <div class="w-1/3 h-4 my-1 bg-slate-300"></div>
+                        <div class="w-1/2 h-7 bg-slate-300"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="w-full bg-slate-300 aspect-[9/13]"></div>
+                    <div class="m-2 md:m-4">
+                        <div class="w-full h-7 bg-slate-300"></div>
+                        <div class="w-1/3 h-4 my-1 bg-slate-300"></div>
+                        <div class="w-1/2 h-7 bg-slate-300"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="w-full bg-slate-300 aspect-[9/13]"></div>
+                    <div class="m-2 md:m-4">
+                        <div class="w-full h-7 bg-slate-300"></div>
+                        <div class="w-1/3 h-4 my-1 bg-slate-300"></div>
+                        <div class="w-1/2 h-7 bg-slate-300"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="w-full bg-slate-300 aspect-[9/13]"></div>
+                    <div class="m-2 md:m-4">
+                        <div class="w-full h-7 bg-slate-300"></div>
+                        <div class="w-1/3 h-4 my-1 bg-slate-300"></div>
+                        <div class="w-1/2 h-7 bg-slate-300"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="w-full bg-slate-300 aspect-[9/13]"></div>
+                    <div class="m-2 md:m-4">
+                        <div class="w-full h-7 bg-slate-300"></div>
+                        <div class="w-1/3 h-4 my-1 bg-slate-300"></div>
+                        <div class="w-1/2 h-7 bg-slate-300"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="w-full bg-slate-300 aspect-[9/13]"></div>
+                    <div class="m-2 md:m-4">
+                        <div class="w-full h-7 bg-slate-300"></div>
+                        <div class="w-1/3 h-4 my-1 bg-slate-300"></div>
+                        <div class="w-1/2 h-7 bg-slate-300"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="w-full bg-slate-300 aspect-[9/13]"></div>
+                    <div class="m-2 md:m-4">
+                        <div class="w-full h-7 bg-slate-300"></div>
+                        <div class="w-1/3 h-4 my-1 bg-slate-300"></div>
+                        <div class="w-1/2 h-7 bg-slate-300"></div>
+                    </div>
+                </div>
+                <div>
+                    <div class="w-full bg-slate-300 aspect-[9/13]"></div>
+                    <div class="m-2 md:m-4">
+                        <div class="w-full h-7 bg-slate-300"></div>
+                        <div class="w-1/3 h-4 my-1 bg-slate-300"></div>
+                        <div class="w-1/2 h-7 bg-slate-300"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Jika belum melakukan pencarian -->
+        <template x-if="Object.keys(movies).length === 0 && moviesSkeleton == false">
+            <div class="flex items-center justify-center w-full my-8 lg:my-16">
+                <div class="flex flex-col items-center justify-center gap-2 mx-2 md:mx-4 md:gap-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-10 h-10 text-emerald-400 md:w-20 md:h-20">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M15.59 14.37a6 6 0 01-5.84 7.38v-4.8m5.84-2.58a14.98 14.98 0 006.16-12.12A14.98 14.98 0 009.631 8.41m5.96 5.96a14.926 14.926 0 01-5.841 2.58m-.119-8.54a6 6 0 00-7.381 5.84h4.8m2.581-5.84a14.927 14.927 0 00-2.58 5.84m2.699 2.7c-.103.021-.207.041-.311.06a15.09 15.09 0 01-2.448-2.448 14.9 14.9 0 01.06-.312m-2.24 2.39a4.493 4.493 0 00-1.757 4.306 4.493 4.493 0 004.306-1.758M16.5 9a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0z" />
+                    </svg>
+                    <h2 class="text-xl font-semibold text-center lg:text-2xl text-slate-700">Silakan inputkan judul
+                        film
+                        pada kolom yang
+                        telah disediakan</h2>
+                </div>
+            </div>
+        </template>
+        <!-- Jika film tidak ditemukan -->
+        <template x-if="movies.Response == 'False'">
+            <div class="flex items-center justify-center w-full my-8 lg:my-16">
+                <div class="flex flex-col items-center justify-center gap-2 mx-2 md:mx-4 md:gap-4">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                        stroke="currentColor" class="w-10 h-10 text-yellow-400 md:w-20 md:h-20">
+                        <path stroke-linecap="round" stroke-linejoin="round"
+                            d="M12 9v3.75m-9.303 3.376c-.866 1.5.217 3.374 1.948 3.374h14.71c1.73 0 2.813-1.874 1.948-3.374L13.949 3.378c-.866-1.5-3.032-1.5-3.898 0L2.697 16.126zM12 15.75h.007v.008H12v-.008z" />
+                    </svg>
+                    <h2 class="text-xl font-semibold text-center lg:text-2xl text-slate-700">
+                        Tidak dapat menemukan film
+                    </h2>
+                </div>
+            </div>
+        </template>
+        <!-- Jika film ditemukan -->
+        <template x-if="movies.Response == 'True'">
+            <div class="grid grid-cols-2 gap-2 mx-2 my-4 lg:my-8 sm:grid-cols-3 lg:grid-cols-4 xl:grid-cols-5 lg:gap-4">
+                <template x-for="item in movies.Search">
+                    <div class="bg-white border border-emerald-400">
+                        <img :src="item.Poster" :alt="item.Title" class="w-full">
+                        <div class="m-2 md:m-4">
+                            <h2 class="text-xl font-semibold lg:text-2xl" x-text="item.Title"></h2>
+                            <p class="font-medium lg:text-lg text-slate-500" x-text="item.Year"></p>
+                            <button type="button" @click="await detailMovie(item.imdbID)"
+                                class="text-lg my-1 lg:text-xl inline-flex min-h-[1.75rem] md:min-h-[2rem] items-center justify-center font-medium transition-colors duration-75 text-emerald-500 hover:text-emerald-400  outline-none">See
+                                Detail</button>
+                        </div>
+                    </div>
+                </template>
+            </div>
+        </template>
+        <!-- Modal -->
+        <div x-show="openModal" x-cloak>
+            <!-- Backdrop -->
+            <div id="defaultModal" tabindex="-1" aria-hidden="true"
+                class="fixed top-0 bottom-0 left-0 right-0 z-10 flex items-center justify-center md:items-start bg-gray-900/50">
+                <!-- Modal -->
+                <div @click.outside="toggleOpenModal()"
+                    class="w-[90%] md:max-w-2xl m-0 md:mt-14 shadow overflow-y-hidden max-h-[80vh] bg-white rounded-lg p-4 md:px-8 md:py-4 space-y-2 md:space-y-4">
+                    <!-- Modal Title -->
+                    <div class="flex items-center justify-between text-black rounded-t-lg">
+                        <div class="flex items-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-7 h-7">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M3.375 19.5h17.25m-17.25 0a1.125 1.125 0 01-1.125-1.125M3.375 19.5h1.5C5.496 19.5 6 18.996 6 18.375m-3.75 0V5.625m0 12.75v-1.5c0-.621.504-1.125 1.125-1.125m18.375 2.625V5.625m0 12.75c0 .621-.504 1.125-1.125 1.125m1.125-1.125v-1.5c0-.621-.504-1.125-1.125-1.125m0 3.75h-1.5A1.125 1.125 0 0118 18.375M20.625 4.5H3.375m17.25 0c.621 0 1.125.504 1.125 1.125M20.625 4.5h-1.5C18.504 4.5 18 5.004 18 5.625m3.75 0v1.5c0 .621-.504 1.125-1.125 1.125M3.375 4.5c-.621 0-1.125.504-1.125 1.125M3.375 4.5h1.5C5.496 4.5 6 5.004 6 5.625m-3.75 0v1.5c0 .621.504 1.125 1.125 1.125m0 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125m1.5-3.75C5.496 8.25 6 7.746 6 7.125v-1.5M4.875 8.25C5.496 8.25 6 8.754 6 9.375v1.5m0-5.25v5.25m0-5.25C6 5.004 6.504 4.5 7.125 4.5h9.75c.621 0 1.125.504 1.125 1.125m1.125 2.625h1.5m-1.5 0A1.125 1.125 0 0118 7.125v-1.5m1.125 2.625c-.621 0-1.125.504-1.125 1.125v1.5m2.625-2.625c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125M18 5.625v5.25M7.125 12h9.75m-9.75 0A1.125 1.125 0 016 10.875M7.125 12C6.504 12 6 12.504 6 13.125m0-2.25C6 11.496 5.496 12 4.875 12M18 10.875c0 .621-.504 1.125-1.125 1.125M18 10.875c0 .621.504 1.125 1.125 1.125m-2.25 0c.621 0 1.125.504 1.125 1.125m-12 5.25v-5.25m0 5.25c0 .621.504 1.125 1.125 1.125h9.75c.621 0 1.125-.504 1.125-1.125m-12 0v-1.5c0-.621-.504-1.125-1.125-1.125M18 18.375v-5.25m0 5.25v-1.5c0-.621.504-1.125 1.125-1.125M18 13.125v1.5c0 .621.504 1.125 1.125 1.125M18 13.125c0-.621.504-1.125 1.125-1.125M6 13.125v1.5c0 .621-.504 1.125-1.125 1.125M6 13.125C6 12.504 5.496 12 4.875 12m-1.5 0h1.5m-1.5 0c-.621 0-1.125.504-1.125 1.125v1.5c0 .621.504 1.125 1.125 1.125M19.125 12h1.5m0 0c.621 0 1.125.504 1.125 1.125v1.5c0 .621-.504 1.125-1.125 1.125m-17.25 0h1.5m14.25 0h1.5" />
+                            </svg>
+
+                            <h2 class="text-xl font-semibold lg:text-2xl">Movie Detail</h2>
+                        </div>
+                        <div class="px-0 btn-reset" @click="toggleOpenModal()">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="w-6 h-6 cursor-pointer">
+                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                            </svg>
+                        </div>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="max-h-[65vh] overflow-y-auto">
+                        <template x-for="(item, index) in movie">
+                            <template
+                                x-if="index != 'Poster' && index != 'Ratings' && index != 'Response' && index != 'imdbID'">
+                                <div class="flex">
+                                    <div class="w-1/3 pr-2 font-bold text-end text-emerald-500" x-text="index"></div>
+                                    <div class="w-2/3 pl-2" x-text="item"></div>
+                                </div>
+                            </template>
+                        </template>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="flex items-center gap-2 justify-evenly md:gap-4">
+                        <template x-for="item in movie.Ratings">
+                            <div class="flex-1 text-center">
+                                <h3 class="text-xl font-bold" x-text="item.Value">80/100</h3>
+                                <p class="text-sm leading-none" x-text="item.Source">Internet Movie Database</p>
+                            </div>
+                        </template>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Skeleton -->
+        <div x-show="modalSkeleton" x-cloak>
+            <!-- Backdrop -->
+            <div id="defaultModal" tabindex="-1" aria-hidden="true"
+                class="fixed top-0 bottom-0 left-0 right-0 z-20 flex items-center justify-center md:items-start bg-gray-900/50">
+                <!-- Modal -->
+                <div
+                    class="w-[90%] md:max-w-2xl m-0 md:mt-14 shadow overflow-y-hidden max-h-[80vh] bg-white rounded-lg p-4 md:px-8 md:py-4 space-y-2 md:space-y-4">
+                    <!-- Modal Title -->
+                    <div class="flex items-center justify-between text-black rounded-t-lg">
+                        <div class="flex items-center w-1/2 gap-2 h-7 bg-slate-300 animate-pulse"></div>
+                        <div class="w-6 h-6 px-0 bg-slate-300 animate-pulse"></div>
+                    </div>
+                    <!-- Modal Body -->
+                    <div class="max-h-[65vh] overflow-y-auto space-y-2">
+                        <div class="flex">
+                            <div class="w-1/3 pr-2">
+                                <div class="w-1/2 h-5 ml-auto bg-emerald-300 animate-pulse"></div>
+                            </div>
+                            <div class="w-2/3 pl-2">
+                                <div class="w-2/3 h-5 mr-auto bg-slate-300 animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 pr-2">
+                                <div class="w-1/2 h-5 ml-auto bg-emerald-300 animate-pulse"></div>
+                            </div>
+                            <div class="w-2/3 pl-2">
+                                <div class="w-2/3 h-5 mr-auto bg-slate-300 animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 pr-2">
+                                <div class="w-1/2 h-5 ml-auto bg-emerald-300 animate-pulse"></div>
+                            </div>
+                            <div class="w-2/3 pl-2">
+                                <div class="w-2/3 h-5 mr-auto bg-slate-300 animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 pr-2">
+                                <div class="w-1/2 h-5 ml-auto bg-emerald-300 animate-pulse"></div>
+                            </div>
+                            <div class="w-2/3 pl-2">
+                                <div class="w-2/3 h-5 mr-auto bg-slate-300 animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 pr-2">
+                                <div class="w-1/2 h-5 ml-auto bg-emerald-300 animate-pulse"></div>
+                            </div>
+                            <div class="w-2/3 pl-2">
+                                <div class="w-2/3 h-5 mr-auto bg-slate-300 animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 pr-2">
+                                <div class="w-1/2 h-5 ml-auto bg-emerald-300 animate-pulse"></div>
+                            </div>
+                            <div class="w-2/3 pl-2">
+                                <div class="w-2/3 h-5 mr-auto bg-slate-300 animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 pr-2">
+                                <div class="w-1/2 h-5 ml-auto bg-emerald-300 animate-pulse"></div>
+                            </div>
+                            <div class="w-2/3 pl-2">
+                                <div class="w-2/3 h-5 mr-auto bg-slate-300 animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 pr-2">
+                                <div class="w-1/2 h-5 ml-auto bg-emerald-300 animate-pulse"></div>
+                            </div>
+                            <div class="w-2/3 pl-2">
+                                <div class="w-2/3 h-5 mr-auto bg-slate-300 animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 pr-2">
+                                <div class="w-1/2 h-5 ml-auto bg-emerald-300 animate-pulse"></div>
+                            </div>
+                            <div class="w-2/3 pl-2">
+                                <div class="w-2/3 h-5 mr-auto bg-slate-300 animate-pulse"></div>
+                            </div>
+                        </div>
+                        <div class="flex">
+                            <div class="w-1/3 pr-2">
+                                <div class="w-1/2 h-5 ml-auto bg-emerald-300 animate-pulse"></div>
+                            </div>
+                            <div class="w-2/3 pl-2">
+                                <div class="w-2/3 h-5 mr-auto bg-slate-300 animate-pulse"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Modal Footer -->
+                    <div class="flex items-center gap-2 justify-evenly md:gap-4">
+                        <div class="flex flex-col items-center justify-center flex-1 gap-2 text-center">
+                            <div class="w-20 h-7 bg-slate-300 animate-pulse"></div>
+                            <div class="w-full h-5 bg-slate-300 animate-pulse"></div>
+                        </div>
+                        <div class="flex flex-col items-center justify-center flex-1 gap-2 text-center">
+                            <div class="w-20 h-7 bg-slate-300 animate-pulse"></div>
+                            <div class="w-full h-5 bg-slate-300 animate-pulse"></div>
+                        </div>
+                        <div class="flex flex-col items-center justify-center flex-1 gap-2 text-center">
+                            <div class="w-20 h-7 bg-slate-300 animate-pulse"></div>
+                            <div class="w-full h-5 bg-slate-300 animate-pulse"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
