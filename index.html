@@ -49,7 +49,8 @@
         <form @submit.prevent="await searchMovie()" class="mx-4 my-4 lg:my-8">
             <div class="flex items-center">
                 <input type="search" placeholder="Movie title..." name="keyword" id="keyword" x-model="keyword"
-                    class="flex-1 bg-white flex w-full px-3 rounded-s-lg shadow-sm min-h-[2.25rem] py-0 md:min-h-[2.5rem] border border-gray-300 outline-0 focus:border-emerald-500 focus:ring-emerald-500">
+                    class="flex-1 bg-white flex w-full px-3 rounded-s-lg shadow-sm min-h-[2.25rem] py-0 md:min-h-[2.5rem] border border-gray-300 outline-0 focus:border-emerald-500 focus:ring-emerald-500"
+                    required>
                 <button type="submit"
                     class="inline-flex items-center justify-center font-medium transition-colors duration-75 border rounded-e-lg shadow-sm min-h-[2.25rem] px-3 md:min-h-[2.5rem] text-sm md:text-base text-emerald-500 focus:outline-none focus-visible:ring border-emerald-600 hover:bg-emerald-600 hover:text-white active:bg-emerald-700 disabled:bg-emerald-700 focus-visible:ring-emerald-400">
                     Search
