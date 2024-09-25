@@ -27,7 +27,7 @@ Perihal sedikit upgrade, saya menambahkan skeleton pada list movies dan modal mo
 # Repo & Demo
 
 Repo: https://github.com/sejutaimpian/alpine-movie  
-Demo: https://alpine-movie.sampurasun.my.id/
+Demo: https://alpine-movie.kid.my.id/
 
 # Disclaimer
 
